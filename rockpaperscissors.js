@@ -6,6 +6,24 @@ let score = JSON.parse(localStorage.getItem('score')) || {
 
 updateScoreElemenst();
 
+let isAutoPlaying = false;
+let intervalId;
+
+function autoPlay() {
+
+    if (!isAutoPlaying) {
+        intervalId = setInterval(function () {
+            const playerMove = pickComputerMove(); //pickComputerMove picks a random move so we set it into the playermove
+            playGame(playerMove);
+        }, 1000)
+        isAutoPlaying = true;
+    }else{
+        clearInterval(intervalId);
+        isAutoPlaying = false;
+    }
+    isAutoPlaying ? document.querySelector(".autoPlayBtn").textContent = "STOP" :  document.querySelector(".autoPlayBtn").textContent = "AUTO PLAY";
+}
+
 function playGame(playerMove) {
     let compMove = pickComputerMove();
 
@@ -16,7 +34,7 @@ function playGame(playerMove) {
             result = 'tie';
         } else if (compMove === 'paper') {
             result = 'you loose';
-        } else if(compMove === 'scissors'){
+        } else if (compMove === 'scissors') {
             result = 'you win';
         }
 
@@ -25,16 +43,16 @@ function playGame(playerMove) {
             result = 'you win';
         } else if (compMove === 'paper') {
             result = 'tie';
-        } else if(compMove === 'scissors') {
+        } else if (compMove === 'scissors') {
             result = 'you loose';
         }
 
-    } else if (playerMove === 'scissors'){
+    } else if (playerMove === 'scissors') {
         if (compMove === 'rock') {
             result = 'you loose';
         } else if (compMove === 'paper') {
             result = 'you win';
-        } else if(compMove === 'scissors') {
+        } else if (compMove === 'scissors') {
             result = 'tie';
         }
     }
@@ -84,8 +102,9 @@ function resetGame() {
     document.querySelector(".js-result").innerHTML = "Game is reset";
     document.querySelector(".js-moves").innerHTML = "";
 
-
 }
+
+
 
 function updateScoreElemenst() {
     document.querySelector(".js-score").innerHTML = `Wins: ${score.Wins}, Losses: ${score.Losses} , Ties: ${score.Ties}`
