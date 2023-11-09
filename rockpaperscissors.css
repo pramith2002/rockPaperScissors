@@ -21,7 +21,8 @@ body {
     height: 50px;
 }
 
-.resetbtn{
+.resetbtn,
+.autoPlayBtn{
     width: fit-content;
     height: fit-content;
     padding: 10px 15px;
@@ -30,7 +31,8 @@ body {
     transition: transform 0.3s;
 }
 
-.resetbtn:hover{
+.resetbtn:hover,
+.autoPlayBtn:hover{
     transform: scale(1.2);
     transition: transform 0.3s;
 }
